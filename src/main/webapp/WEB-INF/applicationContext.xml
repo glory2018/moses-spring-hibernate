@@ -31,4 +31,19 @@
         <property name="cache" value="true"/>
         <property name="order" value="0"/>
     </bean>
+    <!-- <mvc:mapping path="/**" /> 如果只写一个*，则不能拦截类似/*/*的请求。静态资源的请求需要判断不进行拦截 -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="com.ibm.moses.user.interceptor.LoginInterceptor">
+                <property name="excludedUrls">
+                    <list>
+                        <value>/login.form</value>
+                        <value>/user/toAddUser.form</value>
+                        <value>/static/</value>
+                    </list>
+                </property>
+            </bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

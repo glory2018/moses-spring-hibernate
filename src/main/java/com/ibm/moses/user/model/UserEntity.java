@@ -6,7 +6,6 @@
 package com.ibm.moses.user.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 /**
  * @author Moses *
@@ -17,11 +16,13 @@ import java.util.Objects;
 public class UserEntity {
     private long id;
     private String name;
-    private Integer age;
     private String email;
+    private String username;
+    private String password;
 
     @Id
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     public long getId() {
         return id;
     }
@@ -41,13 +42,23 @@ public class UserEntity {
     }
 
     @Basic
-    @Column(name = "age")
-    public Integer getAge() {
-        return age;
+    @Column(name = "username")
+    public String getUsername() {
+        return username;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Basic
+    @Column(name = "password")
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Basic
@@ -58,21 +69,5 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return id == that.id &&
-                Objects.equals(name, that.name) &&
-                Objects.equals(age, that.age) &&
-                Objects.equals(email, that.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, age, email);
     }
 }

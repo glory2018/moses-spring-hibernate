@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author Moses *
  * @Date 2019/4/2
@@ -21,6 +23,27 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController {
     @Autowired
     private UserService userService;
+
+    @RequestMapping("/login")
+    public String login(HttpServletRequest request, UserEntity user, Model model) {
+        if (userService.getUser(user)) {
+            request.getSession().setAttribute("login", true);
+            if ("admin".equals(user.getUsername())) {
+                model.addAttribute("userList", userService.getUserList());
+                return "/user/userList";
+            } else {
+                return "/main";
+            }
+        } else {
+            return "/login";
+        }
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().setAttribute("login", false);
+        return "/login";
+    }
 
     @RequestMapping("/getUserList")
     public String getUserList(Model model) {
@@ -40,8 +63,8 @@ public class UserController {
     }
 
     @RequestMapping("/addUser")
-    public String addUser(UserEntity User, Model model) {
-        userService.addUser(User);
+    public String addUser(UserEntity user, Model model) {
+        userService.addUser(user);
         model.addAttribute("userList", userService.getUserList());
         return "/user/userList";
     }

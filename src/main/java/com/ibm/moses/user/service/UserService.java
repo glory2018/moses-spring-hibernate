@@ -18,6 +18,8 @@ public interface UserService {
 
     List<UserEntity> getUserList();
 
+    Boolean getUser(UserEntity user);
+
     void addUser(UserEntity userEntity);
 
     void delUser(long id);

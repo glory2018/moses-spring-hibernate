@@ -9,9 +9,7 @@ import com.ibm.moses.user.dao.UserDao;
 import com.ibm.moses.user.model.UserEntity;
 import com.ibm.moses.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -32,6 +30,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserEntity> getUserList() {
         return userDao.getUserList();
+    }
+
+    @Override
+    public Boolean getUser(UserEntity user) {
+        List<UserEntity> list = userDao.getUserList(user);
+        return list.size() > 0;
     }
 
     @Override

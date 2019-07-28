@@ -8,7 +8,6 @@ package com.ibm.moses.user.dao.impl;
 import com.ibm.moses.common.BaseDao;
 import com.ibm.moses.user.dao.UserDao;
 import com.ibm.moses.user.model.UserEntity;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,6 +28,12 @@ public class UserDaoImpl extends BaseDao<UserEntity> implements UserDao {
     public List<UserEntity> getUserList() {
         String hql = "from UserEntity";
         return queryHQLList(hql);
+    }
+
+    @Override
+    public List<UserEntity> getUserList(UserEntity user) {
+        String hql = "from UserEntity p where p.username = ?0 and p.password = ?1 ";
+        return queryHQLList(hql, user.getUsername(), user.getPassword());
     }
 
     @Override

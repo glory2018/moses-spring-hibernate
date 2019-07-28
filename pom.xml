@@ -121,6 +121,12 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.26</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>moses-spring-hibernate</finalName>

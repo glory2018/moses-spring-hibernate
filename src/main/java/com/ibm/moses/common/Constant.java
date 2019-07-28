@@ -10,5 +10,4 @@ package com.ibm.moses.common;
  * @Date 2019/4/4
  */
 public class Constant {
-
 }

@@ -79,5 +79,4 @@ public class BaseDao<T> {
         }
         return nativeQuery.getResultList();
     }
-
 }

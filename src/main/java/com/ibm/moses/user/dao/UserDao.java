@@ -18,6 +18,8 @@ public interface UserDao {
 
     List<UserEntity> getUserList();
 
+    List<UserEntity> getUserList(UserEntity user);
+
     void addUser(UserEntity userEntity);
 
     void delUser(long id);
